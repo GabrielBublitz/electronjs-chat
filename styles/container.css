@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* .background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../src/img/IWHY.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 90vh;
+    width: 100%;
+    z-index: -1;
+    opacity: .1;
+} */
+
+.titlebar {
+    -webkit-app-region: drag;
+}
+
+.titlebar-button {
+    -webkit-app-region: no-drag;
+}
+
+.containerBtn {
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbarBtn {
+    background-color: transparent;
+    height: 100%;
+    width: 30px;
+}
+
+.navbarBtn:hover {
+    background-color: #363a4b;
+}
+
+.navbarBtnClose:hover{
+    background-color: #b85c5c;
+}
+
+.brand-container{
+    display: flex;
+    height: 100%;
+    width: fit-content;
+    padding: 0px 10px;
+    gap: 5px;
+    align-items: center;
+}
+
+.title{
+    text-align: center;
+    padding: 0px 10px;
+    color: #efefef;
+}
