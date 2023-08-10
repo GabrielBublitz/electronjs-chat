@@ -1,4 +1,4 @@
-.container {
+.container_test {
     display: flex;
     width: 100%;
     height: 100%;
@@ -22,7 +22,7 @@
     -webkit-app-region: drag;
 }
 
-.titlebar-button {
+.titlebar_button {
     -webkit-app-region: no-drag;
 }
 
@@ -46,7 +46,7 @@
     background-color: #b85c5c;
 }
 
-.brand-container{
+.brand_container{
     display: flex;
     height: 100%;
     width: fit-content;
@@ -55,8 +55,20 @@
     align-items: center;
 }
 
-.title{
+.title_test{
     text-align: center;
     padding: 0px 10px;
     color: #efefef;
+}
+
+.card_container{
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    gap: 10px;
+}
+
+.content_container{
+    width: 100%;
+    padding: 10px;
 }
