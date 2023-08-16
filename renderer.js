@@ -1,13 +1,15 @@
-document.getElementById('closeBtn').addEventListener('click', () => {
-    window.ipcRenderer.send('close');
+document.getElementById("closeBtn").addEventListener("click", () => {
+  window.ipcRenderer.send("close");
 });
 
-document.getElementById('maximizeBtn').addEventListener('click', () =>
-{
-    window.ipcRenderer.send('maximize')
-})
+document.getElementById("maximizeBtn").addEventListener("click", () => {
+  window.ipcRenderer.send("maximize");
+});
 
-document.getElementById('minimizeBtn').addEventListener('click', () =>
-{
-    window.ipcRenderer.send('minimize')
-})
+document.getElementById("minimizeBtn").addEventListener("click", () => {
+  window.ipcRenderer.send("minimize");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.exposedAxios.callApi();
+});

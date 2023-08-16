@@ -1,15 +1,19 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require("electron");
+const axios = require("axios");
 
-contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer);
+contextBridge.exposeInMainWorld("exposedAxios", {
+  callApi: () => {
+    setInterval(getApi, 10000);
+  },
+});
+contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer);
 
-
-window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-      const element = document.getElementById(selector)
-      if (element) element.innerText = text
-    }
-  
-    for (const dependency of ['chrome', 'node', 'electron']) {
-      replaceText(`${dependency}-version`, process.versions[dependency])
-    }
-  })
+function getApi() {
+    axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+    });
+}

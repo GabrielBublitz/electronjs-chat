@@ -20,7 +20,6 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap"
     rel="stylesheet">
 </head>
-
 <body>
   <header class="titlebar">
     <nav class="navbar_test">
@@ -30,11 +29,11 @@
           <h3 class="title_test">IWHY</h3>
         </div>
         <div class="containerBtn">
-          <button id="minimizeBtn" class="navbarBtn titlebar_button"><img src="src/img/icons8-minimize-24.png"
-              width="18px" /></button>
-          <button id="maximizeBtn" class="navbarBtn titlebar_button"><img src="src/img/icons8-unchecked-checkbox-24.png"
-              width="18px" /></button>
-          <button id="closeBtn" class="navbarBtn titlebar_button navbarBtnClose"><img
+          <button id="minimizeBtn" class="navbarBtn titlebar_button" tabindex="-1"><img
+              src="src/img/icons8-minimize-24.png" width="18px" /></button>
+          <button id="maximizeBtn" class="navbarBtn titlebar_button" tabindex="-1"><img
+              src="src/img/icons8-unchecked-checkbox-24.png" width="18px" /></button>
+          <button id="closeBtn" class="navbarBtn titlebar_button navbarBtnClose" tabindex="-1"><img
               src="src/img/icons8-multiply-24.png" width="20px" /></button>
         </div>
       </div>
@@ -78,7 +77,7 @@
       <div class="card text-bg-success mb-3" style="width: 100%;">
         <div class="card-body">
           <h5 class="card-title">Server A</h5>
-          <p class="card-text">
+          <p id="teste" class="card-text">
             <br>
             Status: 200
             <br>
@@ -90,5 +89,4 @@
   </div>
   <script src="renderer.js"></script>
 </body>
-
 </html>
