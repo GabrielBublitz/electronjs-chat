@@ -1,0 +1,19 @@
+.container-message{
+    padding: 10px;
+    height: 10%;
+}
+
+.input-message{
+    width: 100%;
+    padding: 10px;
+    line-height: 1.5rem;
+    border-radius: 10px;
+    
+    font-size: 1.1rem;
+    background-color: #3c3f42;
+    color: var(--bs-gray-600);
+}
+
+.input-message:focus{
+    outline: none;
+}

@@ -13,3 +13,9 @@ document.getElementById("minimizeBtn").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.exposedAxios.callApi();
 });
+
+var form = document.getElementById("myForm");
+
+form.addEventListener('submit', (e) =>{
+  e.preventDefault();
+});
