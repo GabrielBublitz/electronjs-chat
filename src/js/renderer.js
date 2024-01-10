@@ -1,3 +1,4 @@
+// Window control
 document.getElementById("closeBtn").addEventListener("click", () => {
   window.ipcRenderer.send("close");
 });
@@ -10,12 +11,55 @@ document.getElementById("minimizeBtn").addEventListener("click", () => {
   window.ipcRenderer.send("minimize");
 });
 
+// Default behaviors
+
+document.getElementById("myForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+// Features
+
 document.addEventListener("DOMContentLoaded", () => {
-  window.exposedAxios.callApi();
+  // window.exposedAxios.callApi();
 });
 
-var form = document.getElementById("myForm");
+function saveToJson() {
+  var inputValue = document.getElementById("inputValue").value;
+  var portValue = document.getElementById("inputPort").value;
 
-form.addEventListener("submit", (e) =>{
-  e.preventDefault();
+  var jsonData = {
+    address: inputValue,
+    port: portValue
+  };
+
+  var jsonString = JSON.stringify(jsonData);
+
+  window.ipcRenderer.send("save-json", jsonString);
+}
+
+function readJsonFile() {
+  var preview = document.getElementById("preview");
+
+  var json = window.ipcRenderer.send("read-json");
+  console.log(json);
+  
+  preview.textContent = json;
+}
+
+document.getElementById("btnConfirm").addEventListener("click", (event) => {
+  event.preventDefault();
+  saveToJson();
 });
+
+document
+  .getElementById("inputValue")
+  .addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      saveToJson();
+    }
+  });
+
+document.getElementById("btnPreview").addEventListener('click', (event) =>{
+  event.preventDefault();
+  readJsonFile();
+})

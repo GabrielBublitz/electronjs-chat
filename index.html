@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' ">
   <!-- ; style-src 'self' https://fonts.googleapis.com" -->
   <title>Chat</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -44,11 +44,16 @@
     </nav>
   </header>
   <div class="content_container">
+    <div id="preview"></div>
+      <button id="btnPreview" class="btn btn-outline-primary">Preview</button>
     <div class="chat-container">
+      
     </div>
     <div class="container-message">
-      <form id="myForm">
-        <input id="inputValue" class="input-message" type="text" placeholder="Message">
+      <form id="myForm" class="d-flex">
+        <input id="inputPort" class="" type="text" placeholder="Port" >
+        <input id="inputValue" class="input-message me-2" type="text" placeholder="Message">
+        <button id="btnConfirm" class="btn btn-primary">Confirmar</button>
       </form>
     </div>
   </div>
