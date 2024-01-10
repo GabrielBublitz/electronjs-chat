@@ -1,6 +1,9 @@
-const { app, BrowserWindow, ipcMain, contextBridge } = require("electron");
+const path = require('path');
+const fs = require('fs');
+const { app, BrowserWindow, ipcMain, contextBridge } = require('electron');
 
-const path = require("path");
+const isDev = process.env.NODE_ENV !== 'production'
+const isMac = process.platform === 'darwin';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -10,21 +13,25 @@ const createWindow = () => {
     minHeight: 560,
     frame: false,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, './src/js/preload.js'),
       nodeIntegration: true
     },
   });
 
-  win.loadFile("index.html");
+  if(isDev){
+    win.webContents.openDevTools();
+  }
 
-  ipcMain.on("close", () => {
+  win.loadFile('index.html');
+
+  ipcMain.on('close', () => {
     const wind = BrowserWindow.getFocusedWindow();
     if (wind) {
       wind.close();
     }
   });
 
-  ipcMain.on("maximize", () => {
+  ipcMain.on('maximize', () => {
     const wind = BrowserWindow.getFocusedWindow();
     if (wind) {
       if (wind.isMaximized == true) {
@@ -37,7 +44,7 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.on("minimize", () => {
+  ipcMain.on('minimize', () => {
     const wind = BrowserWindow.getFocusedWindow();
     if (wind) {
       wind.minimize();
@@ -48,11 +55,39 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
   });
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+app.on('window-all-closed', () => {
+  if (!isMac) {
+    app.quit();
+  }
+});
+
+ipcMain.on('save-json', (event, data) => {
+
+  const jsonFilePath = './user-config.json';
+
+  fs.writeFileSync(jsonFilePath, data, 'utf-8');
+
+  console.log('Feito');
+});
+
+ipcMain.on('read-json', (event) => {
+    const jsonFilePath = './user-config.json'
+
+    try{
+      const fileContent = fs.readFileSync(jsonFilePath, 'utf-8');
+      const jsonData = JSON.parse(fileContent);
+
+      event.reply('json-data', jsonData);
+      console.log(jsonData);
+    }catch(error){
+      console.error('Erro ao ler Json: ', error);
+      event.reply('json-data', null);
+    }
 });
