@@ -1,14 +1,14 @@
 // Window control
 document.getElementById("closeBtn").addEventListener("click", () => {
-  window.ipcRenderer.send("close");
+  ipcRenderer.send("close");
 });
 
 document.getElementById("maximizeBtn").addEventListener("click", () => {
-  window.ipcRenderer.send("maximize");
+  ipcRenderer.send("maximize");
 });
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
-  window.ipcRenderer.send("minimize");
+  ipcRenderer.send("minimize");
 });
 
 // Default behaviors
@@ -20,7 +20,7 @@ document.getElementById("myForm").addEventListener("submit", (event) => {
 // Features
 
 document.addEventListener("DOMContentLoaded", () => {
-  // window.exposedAxios.callApi();
+  // exposedAxios.callApi();
 });
 
 function saveToJson() {
@@ -29,22 +29,24 @@ function saveToJson() {
 
   var jsonData = {
     address: inputValue,
-    port: portValue
+    port: portValue,
   };
 
   var jsonString = JSON.stringify(jsonData);
 
-  window.ipcRenderer.send("save-json", jsonString);
+  ipcRenderer.send("save-json", jsonString);
 }
 
 function readJsonFile() {
+  ipcRenderer.send("read-json");
+}
+
+ipcRenderer.on("json-data", (jsonData) =>{
   var preview = document.getElementById("preview");
 
-  var json = window.ipcRenderer.send("read-json");
-  console.log(json);
+  preview.textContent = jsonData;
   
-  preview.textContent = json;
-}
+});
 
 document.getElementById("btnConfirm").addEventListener("click", (event) => {
   event.preventDefault();
@@ -59,7 +61,7 @@ document
     }
   });
 
-document.getElementById("btnPreview").addEventListener('click', (event) =>{
+document.getElementById("btnPreview").addEventListener("click", (event) => {
   event.preventDefault();
   readJsonFile();
-})
+});
